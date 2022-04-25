@@ -10,17 +10,17 @@ public class ApiTestsReqres {
 
     @Test
     void singleUser() {
-        get("https://reqres.in/api/users/5")
+        get("https://reqres.in/api/users/2")
                 .then()
                 .statusCode(200)
-                .body("data.id", is(5));
+                .body("data.id", is(2));
     }
 
     @Test
     void deleteUser() {
         given()
                 .when()
-                .delete("https://reqres.in/api/users/5")
+                .delete("https://reqres.in/api/users/2")
                 .then()
                 .statusCode(204);
     }
@@ -38,24 +38,24 @@ public class ApiTestsReqres {
     }
 
     @Test
-    void updateUser() {
-        String userUpdate = "{\"email\": \"captainamerica@marvel.com\", \"first_name\": \"Steve\", \"last_name\": \"Rogers\", \"job\": \"Captain America\"}";
+      void listResource() {
         given()
-                .contentType(JSON)
-                .body(userUpdate)
                 .when()
-                .patch("https://reqres.in/api/users/5")
+                .get("https://reqres.in/api/unknown")
                 .then()
                 .statusCode(200)
-                .body("first_name", is("Steve"))
-                .body("job", is("Captain America"));
+                .body("data.id[3]", is(4))
+                .body("data.name[3]", is("aqua sky"))
+                .body("data.year[3]", is(2003))
+                .body("data.color[3]", is("#7BC4C4"))
+                .body("data.pantone_value[3]", is("14-4811"));
     }
 
     @Test
     void resourceNotFound() {
         given()
                 .when()
-                .get("https://reqres.in/api/unknown/27")
+                .get("https://reqres.in/api/unknown/23")
                 .then()
                 .statusCode(404);
     }
