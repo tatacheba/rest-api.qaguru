@@ -1,4 +1,4 @@
-package tests;
+package tests.homework_19;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -60,7 +60,7 @@ public class SelenoidTests {
                 .extract()
                 .path("total");
 
-        System.out.println("Response: " + response);
+//        System.out.println("Response: " + response);
 
         int expectedResponse = 20;
         assertEquals(expectedResponse, response);
